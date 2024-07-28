@@ -1,17 +1,21 @@
-# online_store/settings.py
-
 import os
 from pathlib import Path
 import dj_database_url
+import django_heroku
 
+# Base directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Secret key management
 SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
 
+# Debug mode management
 DEBUG = True if os.environ.get('DEBUG') == '1' else False
 
+# Allowed hosts management
 ALLOWED_HOSTS = ['tenkaitechstore.herokuapp.com'] if not DEBUG else []
 
+# Installed applications
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -25,6 +29,7 @@ INSTALLED_APPS = [
     'rest_framework',
 ]
 
+# Middleware configuration
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -37,8 +42,10 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
+# Root URL configuration
 ROOT_URLCONF = 'online_store.urls'
 
+# Template settings
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -55,24 +62,28 @@ TEMPLATES = [
     },
 ]
 
+# WSGI application path
 WSGI_APPLICATION = 'online_store.wsgi.application'
 
+# Database configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'jkadc7qsm3d7j8dh',
-        'USER': 'c71pl68bsle11pql',
-        'PASSWORD': 'pfx0wcf6b0v5ih2s',
-        'HOST': 'mgs0iaapcj3p9srz.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
-        'PORT': '3306',
+        'NAME': os.environ.get('DB_NAME', 'jkadc7qsm3d7j8dh'),
+        'USER': os.environ.get('DB_USER', 'c71pl68bsle11pql'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'pfx0wcf6b0v5ih2s'),
+        'HOST': os.environ.get('DB_HOST', 'mgs0iaapcj3p9srz.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'),
+        'PORT': os.environ.get('DB_PORT', '3306'),
     }
 }
 
+# CORS configuration
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://192.168.1.13:3000",
 ]
 
+# Password validation
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -88,17 +99,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Localization settings
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
+# Media files configuration
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Static files configuration
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -107,4 +118,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
+# Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Activate Django-Heroku
+django_heroku.settings(locals())
