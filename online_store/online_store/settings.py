@@ -3,7 +3,6 @@
 import os
 from pathlib import Path
 import dj_database_url
-import django_heroku
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -58,24 +57,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'online_store.wsgi.application'
 
-if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'jkadc7qsm3d7j8dh',
+        'USER': 'c71pl68bsle11pql',
+        'PASSWORD': 'pfx0wcf6b0v5ih2s',
+        'HOST': 'mgs0iaapcj3p9srz.cbetxkdyhwsb.us-east-1.rds.amazonaws.com',
+        'PORT': '3306',
     }
-else:
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('JAWSDB_URL'))
-    }
+}
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://192.168.1.13:3000",
 ]
-
-# CORS_ALLOW_ALL_ORIGINS = True
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -112,5 +108,3 @@ STATICFILES_DIRS = [
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-django_heroku.settings(locals(), staticfiles=False, logging=False)
