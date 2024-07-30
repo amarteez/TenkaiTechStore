@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
 
 # Debug mode management
-DEBUG = True if os.environ.get('DEBUG') == '1' else False
+DEBUG = bool(os.environ.get('DEBUG', False))
 
 # Allowed hosts management
 ALLOWED_HOSTS = ['tenkaitechstore.herokuapp.com'] if not DEBUG else []
@@ -57,7 +57,7 @@ ROOT_URLCONF = 'online_store.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'store', 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'store', 'templates', 'store_templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,8 +69,6 @@ TEMPLATES = [
         },
     },
 ]
-
-
 
 # CORS configuration
 CORS_ALLOWED_ORIGINS = [
