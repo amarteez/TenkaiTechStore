@@ -15,6 +15,14 @@ DEBUG = True if os.environ.get('DEBUG') == '1' else False
 # Allowed hosts management
 ALLOWED_HOSTS = ['tenkaitechstore.herokuapp.com'] if not DEBUG else []
 
+# WSGI application path
+WSGI_APPLICATION = 'online_store.online_store.wsgi.application'
+
+# Database configuration
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get('JAWSDB_URL'))
+}
+
 # Installed applications
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -62,13 +70,7 @@ TEMPLATES = [
     },
 ]
 
-# WSGI application path
-WSGI_APPLICATION = 'online_store.wsgi.application'
 
-# Database configuration
-DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('JAWSDB_URL'))
-}
 
 # CORS configuration
 CORS_ALLOWED_ORIGINS = [
