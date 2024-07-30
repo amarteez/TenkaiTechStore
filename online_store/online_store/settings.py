@@ -67,14 +67,7 @@ WSGI_APPLICATION = 'online_store.wsgi.application'
 
 # Database configuration
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('DB_NAME', 'jkadc7qsm3d7j8dh'),
-        'USER': os.environ.get('DB_USER', 'c71pl68bsle11pql'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'pfx0wcf6b0v5ih2s'),
-        'HOST': os.environ.get('DB_HOST', 'mgs0iaapcj3p9srz.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'),
-        'PORT': os.environ.get('DB_PORT', '3306'),
-    }
+    'default': dj_database_url.config(default=os.environ.get('JAWSDB_URL'))
 }
 
 # CORS configuration
