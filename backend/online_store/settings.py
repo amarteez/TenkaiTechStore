@@ -18,10 +18,19 @@ ALLOWED_HOSTS = ['tenkaitechstore.herokuapp.com'] if not DEBUG else []
 # WSGI application path
 WSGI_APPLICATION = 'online_store.wsgi.application'
 
-
-# Database configuration
+# Configuración de la base de datos
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('JAWSDB_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('DB_NAME', 'jkadc7qsm3d7j8dh'),  # Nombre de la base de datos
+        'USER': os.environ.get('DB_USER', 'c71pl68bsle11pql'),  # Nombre de usuario
+        'PASSWORD': os.environ.get('DB_PASSWORD', 'pfx0wcf6b0v5ih2s'),  # Contraseña
+        'HOST': os.environ.get('DB_HOST', 'mgs0iaapcj3p9srz.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'),  # Host
+        'PORT': os.environ.get('DB_PORT', '3306'),  # Puerto
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  # Opcional: Activa el modo estricto
+        },
+    }
 }
 
 # Installed applications
@@ -53,7 +62,6 @@ MIDDLEWARE = [
 
 # Root URL configuration
 ROOT_URLCONF = 'online_store.urls'
-
 
 # Template settings
 TEMPLATES = [
@@ -109,9 +117,11 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'backend/static'),
-]
+# Opcional: Si necesitas incluir archivos estáticos adicionales del backend, puedes dejarlos aquí.
+#STATICFILES_DIRS = [
+    # Elimina esta línea si no tienes archivos estáticos específicos en `backend/static`.
+    # os.path.join(BASE_DIR, 'backend/static'),
+#]
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
