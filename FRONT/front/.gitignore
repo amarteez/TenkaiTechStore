@@ -1,21 +1,86 @@
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
 
-# testing
-/coverage
+# C extensions
+*.so
 
-# production
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+bin/
+obj/
+build/
+dist/
 
+# Django stuff:
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+db.sqlite3
+*.mo
+*.py[co]
+staticfiles/
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pyright
+.typings/
+
+# env variables
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.*.local
+
+# Testing
+.pytest_cache/
+.tox/
+.coverage
+.hypothesis/
+
+# VS Code
+.vscode/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Editor / IDE
+.idea/
+*.sublime-workspace
+*.sublime-project
+*.iml
+*.vs/
+*.vscode/
 
 # misc
 .DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
