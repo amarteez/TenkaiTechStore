@@ -13,7 +13,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
 DEBUG = bool(os.environ.get('DEBUG', False))
 
 # Allowed hosts management
-ALLOWED_HOSTS = ['tenkaitechstore.herokuapp.com'] if not DEBUG else []
+ALLOWED_HOSTS = ['tenkaitechstore.herokuapp.com', 'localhost', '127.0.0.1']
 
 # WSGI application path
 WSGI_APPLICATION = 'online_store.wsgi.application'
