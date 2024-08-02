@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'store',
     'rest_framework',
-    'online_store',
 ]
 
 # Middleware configuration
