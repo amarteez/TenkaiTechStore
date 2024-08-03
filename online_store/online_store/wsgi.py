@@ -1,3 +1,4 @@
+#wsgi.py de online_store
 import os
 from django.core.wsgi import get_wsgi_application
 
