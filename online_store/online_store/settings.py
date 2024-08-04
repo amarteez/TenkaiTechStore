@@ -1,16 +1,24 @@
 import os
 from pathlib import Path
-import dj_database_url
+import environ
 import django_heroku
+
+# Initialize environment variables
+env = environ.Env(
+    DEBUG=(bool, False)
+)
 
 # Base directory of the project
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Reading .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
 # Secret key management
-SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
+SECRET_KEY = env('SECRET_KEY')
 
 # Debug mode management
-DEBUG = bool(os.environ.get('DEBUG', False))
+DEBUG = env('DEBUG')
 
 # Allowed hosts management
 ALLOWED_HOSTS = ['tenkaitechstore.herokuapp.com', 'localhost', '127.0.0.1']
@@ -18,17 +26,17 @@ ALLOWED_HOSTS = ['tenkaitechstore.herokuapp.com', 'localhost', '127.0.0.1']
 # WSGI application path
 WSGI_APPLICATION = 'online_store.wsgi.application'
 
-# Configuración de la base de datos
+# Database configuration
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('DB_NAME', 'jkadc7qsm3d7j8dh'),  # Nombre de la base de datos
-        'USER': os.environ.get('DB_USER', 'c71pl68bsle11pql'),  # Nombre de usuario
-        'PASSWORD': os.environ.get('DB_PASSWORD', 'pfx0wcf6b0v5ih2s'),  # Contraseña
-        'HOST': os.environ.get('DB_HOST', 'mgs0iaapcj3p9srz.cbetxkdyhwsb.us-east-1.rds.amazonaws.com'),  # Host
-        'PORT': os.environ.get('DB_PORT', '3306'),  # Puerto
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
         'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"  # Opcional: Activa el modo estricto
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
         },
     }
 }
@@ -116,12 +124,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# Opcional: Si necesitas incluir archivos estáticos adicionales del backend, puedes dejarlos aquí.
-#STATICFILES_DIRS = [
-    # Elimina esta línea si no tienes archivos estáticos específicos en `backend/static`.
-    # os.path.join(BASE_DIR, 'backend/static'),
-#]
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

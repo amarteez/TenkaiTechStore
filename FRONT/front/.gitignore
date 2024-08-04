@@ -17,6 +17,7 @@ bin/
 obj/
 build/
 dist/
+.env
 
 # Django stuff:
 *.log
