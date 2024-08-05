@@ -1,3 +1,4 @@
+# .gitignore
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -29,7 +30,7 @@ dist/
 db.sqlite3
 *.mo
 *.py[co]
-staticfiles/
+# staticfiles/  <--- Comentar o eliminar esta línea
 
 # Flask stuff:
 instance/
