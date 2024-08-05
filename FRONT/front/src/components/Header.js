@@ -31,9 +31,9 @@ const Header = () => {
                 <img src={logo} alt="Logo" />
             </div>
             <nav className={isOpen ? 'open' : ''}>
-                <a href="/">Home</a>
-                <a href="/products">Products</a>
-                <a href="/cart">Cart</a>
+                <a href="/">Inicio</a>
+                <a href="/products">Productos</a>
+                <a href="/cart">Carrito</a>
             </nav>
             <button className="menu-toggle" onClick={toggleMenu}>
                 ☰

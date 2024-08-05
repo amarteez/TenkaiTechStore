@@ -30,7 +30,7 @@ const Product = ({ product }) => {
                     onClick={() => handleAddToCart(product)}
                     data-id={product.id} // Añadimos un atributo data-id para identificar el botón
                 >
-                    Add to Cart
+                    Añadir
                 </button>
                 <Link to={`/products/${product.id}`}>
                     <button className="product-button">Info</button>
