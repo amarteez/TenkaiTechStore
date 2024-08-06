@@ -1,35 +1,32 @@
 import os
 from pathlib import Path
-import environ
 
-env = environ.Env(
-    DEBUG=(bool, False)
-)
-
+# Define BASE_DIR
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+# Configura la clave secreta
+SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
 
-SECRET_KEY = env('SECRET_KEY')
-DEBUG = env('DEBUG')
-ALLOWED_HOSTS = ['your-render-subdomain.onrender.com', 'localhost', '127.0.0.1']
+# Configura el modo de depuración
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-WSGI_APPLICATION = 'online_store.wsgi.application'
+# Permite los hosts que se conectan a la aplicación
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'your-render-subdomain.onrender.com']
 
+# Configura la base de datos
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        'ENGINE': 'djongo',
+        'CLIENT': {
+            'host': os.environ.get('MONGOURI', 'mongodb://localhost:27017/mydatabase'),
         },
     }
 }
 
+# Configura la aplicación WSGI
+WSGI_APPLICATION = 'online_store.wsgi.application'
+
+# Otras configuraciones (apps instaladas, middleware, etc.)
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
