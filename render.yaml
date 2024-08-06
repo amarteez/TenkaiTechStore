@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: my-django-app
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn online_store.wsgi
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        value: your-secret-key
+      - key: DJANGO_DEBUG
+        value: False
+      - key: DJANGO_ALLOWED_HOSTS
+        value: 'your-render-subdomain.onrender.com,localhost,127.0.0.1'
+      - key: DB_NAME
+        value: your-db-name
+      - key: DB_USER
+        value: your-db-user
+      - key: DB_PASSWORD
+        value: your-db-password
+      - key: DB_HOST
+        value: your-db-host
+      - key: DB_PORT
+        value: your-db-port
