@@ -7,18 +7,10 @@ services:
     startCommand: gunicorn online_store.wsgi
     envVars:
       - key: DJANGO_SECRET_KEY
-        value: your-secret-key
+        value: 0m-%ly4^j3dc3%azml14h&^%*tu9m52x)hn-i8ro=uvc-%0vdo
       - key: DJANGO_DEBUG
         value: False
       - key: DJANGO_ALLOWED_HOSTS
         value: 'your-render-subdomain.onrender.com,localhost,127.0.0.1'
-      - key: DB_NAME
-        value: your-db-name
-      - key: DB_USER
-        value: your-db-user
-      - key: DB_PASSWORD
-        value: your-db-password
-      - key: DB_HOST
-        value: your-db-host
-      - key: DB_PORT
-        value: your-db-port
+      - key: MONGO_URI
+        value: mongodb+srv://anelmartez18:NPsCQPVYRHhhOczM@tenkaitechdb.o8qlj.mongodb.net/?retryWrites=true&w=majority&appName=tenkaitechDB
