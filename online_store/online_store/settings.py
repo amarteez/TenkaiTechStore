@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+import mongoengine
 
 # Define BASE_DIR
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -11,17 +12,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'default-secret-key')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
 # Permite los hosts que se conectan a la aplicación
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'your-render-subdomain.onrender.com']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '').split(',')
 
-# Configura la base de datos
-DATABASES = {
-    'default': {
-        'ENGINE': 'djongo',
-        'CLIENT': {
-            'host': os.environ.get('MONGOURI', 'mongodb://localhost:27017/mydatabase'),
-        },
-    }
-}
+# Configura la base de datos para MongoEngine usando MONGO_URI
+MONGO_URI = os.environ.get('MONGO_URI')
+mongoengine.connect(host=MONGO_URI)
 
 # Configura la aplicación WSGI
 WSGI_APPLICATION = 'online_store.wsgi.application'
@@ -72,6 +67,7 @@ TEMPLATES = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://192.168.1.13:3000",
+    "https://amarteez.github.io/TenkaiTechStore/",  # URL de GitHub Pages
 ]
 
 AUTH_PASSWORD_VALIDATORS = [
