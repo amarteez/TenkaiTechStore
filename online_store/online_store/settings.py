@@ -23,7 +23,7 @@ WSGI_APPLICATION = 'online_store.wsgi.application'
 
 # Otras configuraciones (apps instaladas, middleware, etc.)
 INSTALLED_APPS = [
-    'django.contrib.admin',
+    # 'django.contrib.admin',  # Comentado para evitar conflictos con mongoengine
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -67,7 +67,7 @@ TEMPLATES = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://192.168.1.13:3000",
-    "https://amarteez.github.io/TenkaiTechStore/",  # URL de GitHub Pages
+    "https://amarteez.github.io",  # Solo el dominio
 ]
 
 AUTH_PASSWORD_VALIDATORS = [

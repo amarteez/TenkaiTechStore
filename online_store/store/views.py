@@ -13,8 +13,9 @@ from .serializers import ProductSerializer
 # View to handle category list
 class CategoryListView(View):
     def get(self, request, *args, **kwargs):
-        categories = list(Category.objects.values())
-        return JsonResponse(categories, safe=False)
+        categories = Category.objects.all()
+        categories_list = [{'id': category.id, 'name': category.name} for category in categories]
+        return JsonResponse(categories_list, safe=False)
 
 # View to handle product list by category
 class ProductListView(View):
@@ -26,7 +27,16 @@ class ProductListView(View):
             products = Product.objects.filter(category=category)
             products_by_category[category.id] = {
                 'category_name': category.name,
-                'products': list(products.values('id', 'name', 'description', 'price', 'image', 'image_url'))
+                'products': [
+                    {
+                        'id': product.id,
+                        'name': product.name,
+                        'description': product.description,
+                        'price': product.price,
+                        'image': product.image,
+                        'image_url': product.image_url
+                    } for product in products
+                ]
             }
 
         return JsonResponse(products_by_category, safe=False)
